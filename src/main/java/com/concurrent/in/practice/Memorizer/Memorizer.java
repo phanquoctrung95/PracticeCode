@@ -29,13 +29,17 @@ public class Memorizer<A, V> implements Computable<A, V> {
                     f = ft;
                     ft.run();
                 }
+                ExecutorService executorService = Executors.newFixedThreadPool(10);
+                executorService.submit()
             }
             try {
                 return f.get();
-            } catch (CancellationException e) {
-                cache.remove(arg, f);
             } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (CancellationException e){
+                System.out.println("Task has been cancelled");
             }
+
         }
     }
 }
